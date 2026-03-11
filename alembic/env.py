@@ -24,9 +24,14 @@ def run_migrations_offline() -> None:
 
 def run_migrations_online() -> None:
     # Para Alembic usamos psycopg (driver síncrono)
+    # Neon requiere SSL, así que mantenemos sslmode en la URL
     url = settings.DATABASE_URL.replace("postgresql://", "postgresql+psycopg://")
     
-    connectable = create_engine(url, poolclass=pool.NullPool)
+    connectable = create_engine(
+        url,
+        poolclass=pool.NullPool,
+        connect_args={"sslmode": "require"}
+    )
 
     with connectable.connect() as connection:
         context.configure(
