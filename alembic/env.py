@@ -1,5 +1,5 @@
 from logging.config import fileConfig
-from sqlalchemy import engine_from_config, pool, create_engine
+from sqlalchemy import create_engine, pool
 from alembic import context
 from app.config import settings
 from app.database import Base
@@ -23,9 +23,8 @@ def run_migrations_offline() -> None:
         context.run_migrations()
 
 def run_migrations_online() -> None:
-    from app.config import settings
-    
-    url = settings.DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://")
+    # Para Alembic usamos psycopg (driver síncrono)
+    url = settings.DATABASE_URL.replace("postgresql://", "postgresql+psycopg://")
     
     connectable = create_engine(url, poolclass=pool.NullPool)
 
