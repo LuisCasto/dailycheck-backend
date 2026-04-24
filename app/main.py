@@ -7,7 +7,12 @@ app = FastAPI(title="DailyCheck API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://dailycheck-salsa.vercel.app"],
+    allow_origins=[
+        "http://localhost:5173",
+        "https://dailycheck-salsa.vercel.app",
+        "https://dailycheck-jynzpusbp-axel290es-2903s-projects.vercel.app",
+    ],
+    allow_origin_regex=r"https://dailycheck-.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
