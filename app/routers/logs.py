@@ -102,6 +102,13 @@ def get_stats(
         elif i > 0:
             break
 
+    return StatsOut(
+        habit_id=habit_id,
+        streak=streak,
+        completion_rate_30d=rate,
+        total_logs=total
+    )
+
 @router.patch("/{log_id}/note", response_model=HabitLogOut)
 def update_note(
     log_id: UUID,
@@ -119,5 +126,3 @@ def update_note(
     db.commit()
     db.refresh(log)
     return log
-
-    return StatsOut(habit_id=habit_id, streak=streak, completion_rate_30d=rate, total_logs=total)
