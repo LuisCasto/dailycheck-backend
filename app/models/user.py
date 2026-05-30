@@ -15,3 +15,4 @@ class User(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     habits = relationship("Habit", back_populates="user", cascade="all, delete-orphan")
+    logs = relationship("HabitLog", back_populates="user", cascade="all, delete-orphan")

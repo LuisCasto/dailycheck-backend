@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
-from app.routers import auth, habits, logs
+from app.routers import auth, habits, logs, users
 
 app = FastAPI(title="DailyCheck API")
 
@@ -19,6 +19,7 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
+app.include_router(users.router)
 app.include_router(habits.router)
 app.include_router(logs.router)
 

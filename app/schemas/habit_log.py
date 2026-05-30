@@ -8,6 +8,11 @@ class HabitLogCreate(BaseModel):
     date: date
     note: Optional[str] = None
 
+class HabitLogUpdate(BaseModel):
+    date: Optional[date] = None
+    completed: Optional[bool] = None
+    note: Optional[str] = None
+
 class HabitLogOut(BaseModel):
     id: UUID
     habit_id: UUID
